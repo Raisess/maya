@@ -54,5 +54,13 @@ export default class Entity implements IEntity {
 	public getDraw(): string {
 		return this.props.draw;
 	}
+
+	public move(pos: EntityPos): EntityPos {
+		if (this.playable) {
+			return pos;
+		}
+
+		throw new Error("Can't move this entity, 'cause: entity isn't playable.");
+	}
 }
 
