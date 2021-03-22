@@ -58,10 +58,7 @@ export default class Scene implements IScene {
 						const ent: IEntity = this.entities[i];
 
 						if (ent.getName() === name) {
-							this.entities[i].setX(pos.x || ent.getX());
-							this.entities[i].setY(pos.y || ent.getY());
-
-							this.ctx.drawImage(ent.getDraw(), this.entities[i].getX(), this.entities[i].getY(), ent.getWidth(), ent.getHeight());
+							this.ctx.drawImage(ent.getDraw(), pos.x || ent.getX(), pos.y || ent.getY(), ent.getWidth(), ent.getHeight());
 						} else {
 							this.ctx.drawImage(ent.getDraw(), ent.getX(), ent.getY(), ent.getWidth(), ent.getHeight());
 						}

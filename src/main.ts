@@ -13,13 +13,17 @@ const playerEntity: ISceneEntity = scene.addEntity(player);
 
 document.addEventListener("keydown", (ev: KeyboardEvent): void => {
 	if (ev.key === "s") {
-		playerEntity.update({ y: player.getY() + 10 });
+		player.setY(player.getY() + 10);
+		playerEntity.update({ y: player.getY() });
 	} else if (ev.key === "w") {
-		playerEntity.update({ y: player.getY() - 10 });
+		player.setY(player.getY() - 10);
+		playerEntity.update({ y: player.getY() });
 	} else if (ev.key === "d") {
-		playerEntity.update({ x: player.getX() + 10 });
+		player.setX(player.getX() + 10);
+		playerEntity.update({ x: player.getX() });
 	} else if (ev.key === "a") {
-		playerEntity.update({ x: player.getX() - 10 });
+		player.setX(player.getX() - 10);
+		playerEntity.update({ x: player.getX() });
 	}
 });
 
@@ -27,9 +31,25 @@ const enemy: Entity = new Entity(
 	"Enemy",
 	"https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fvignette.wikia.nocookie.net%2Fpixelpeople%2Fimages%2F9%2F96%2FZoologist2Male.png%2Frevision%2Flatest%3Fcb%3D20140918120503&f=1&nofb=1",
 	{ width: 40, height: 50 },
-	{ x: 60, y: 10 }
+	{ x: 60, y: 300 }
 );
 const enemyEntity: ISceneEntity = scene.addEntity(enemy);
 
-enemyEntity.update({ x: 60, y: 300 });
+setInterval((): void => {
+	if (enemy.getX() > player.getX()) {
+		enemy.setX(enemy.getX() - 10);
+		enemyEntity.update({ x: enemy.getX() });
+	} else if (enemy.getX() < player.getX()) {
+		enemy.setX(enemy.getX() + 10);
+		enemyEntity.update({ x: enemy.getX() });
+	}
+
+	if (enemy.getY() > player.getY()) {
+		enemy.setY(enemy.getY() - 10);
+		enemyEntity.update({ x: enemy.getY() });
+	} else if (enemy.getY() < player.getY()) {
+		enemy.setY(enemy.getY() + 10);
+		enemyEntity.update({ x: enemy.getY() });
+	}
+}, 100);
 
