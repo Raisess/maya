@@ -15,8 +15,15 @@ export type EntityPos = {
 };
 
 export interface IEntity {
-	getName():   string;
-	getDraw():   HTMLImageElement;
+	setName(name: string): void;
+	setDraw(draw: string): void;
+
+	getName(): string;
+	getDraw(): HTMLImageElement;
+
+	setWidth(width: number):   void;
+	setHeight(height: number): void;
+
 	getWidth():  number;
 	getHeight(): number;
 
@@ -48,8 +55,16 @@ export default class Entity implements IEntity {
 		this.pos.y = initialPos.y;
 	}
 
+	public setName(name: string): void {
+		this.props.name = name;
+	}
+
 	public getName(): string {
 		return this.props.name;
+	}
+
+	public setDraw(draw: string): void {
+		this.props.draw = draw;
 	}
 
 	public getDraw(): HTMLImageElement {
@@ -60,8 +75,16 @@ export default class Entity implements IEntity {
 		return image;
 	}
 
+	public setWidth(width: number): void {
+		this.props.size.width = width;
+	}
+
 	public getWidth(): number {
 		return this.props.size.width;
+	}
+
+	public setHeight(height: number): void {
+		this.props.size.height = height;
 	}
 
 	public getHeight(): number {
