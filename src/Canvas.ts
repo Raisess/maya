@@ -1,13 +1,16 @@
-export default class Canvas {
-	private readonly canvas: any = document.getElementById("gameCanvas")!;
+import { IEntity } from "./Entity";
 
-	private ctx: any = this.canvas.getContext("2d");
+export default class Canvas {
+	private readonly canvas: HTMLCanvasElement = (document.getElementById("gameCanvas")! as HTMLCanvasElement);
+
+	private ctx: CanvasRenderingContext2D = this.canvas.getContext("2d")!;
 
 	constructor() {
 		this.ctx.font = "30px Arial";
-		this.ctx.fillText("Hello World", 10, 30);
+	}
 
-		console.log("yo");
+	public addEntity(entity: IEntity): void {
+		this.ctx.fillText(entity.getDraw(), entity.pos.x, entity.pos.y);
 	}
 }
 
