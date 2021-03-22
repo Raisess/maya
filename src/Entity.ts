@@ -3,9 +3,15 @@ export type EntityPos = {
 	y: number;
 };
 
+export type EntitySize = {
+	width:  number;
+	height: number;
+};
+
 export type EntityProps = {
 	name: string;
 	draw: string;
+	size: EntitySize;
 };
 
 export interface IEntity {
@@ -19,16 +25,21 @@ export interface IEntity {
 export default class Entity implements IEntity {
 	public props: EntityProps = {
 		name: "",
-		draw: ""
+		draw: "",
+		size: {
+			width:  0,
+			height: 0
+		}
 	};
 
 	public pos: EntityPos = { x: 0, y: 0 };
 
 	private playable: boolean;
 
-	constructor(name: string, draw: string, initialPos: EntityPos, playable: boolean = false) {
+	constructor(name: string, draw: string, size: EntitySize, initialPos: EntityPos, playable: boolean = false) {
 		this.props.name = name;
 		this.props.draw = draw;
+		this.props.size = size;
 
 		this.pos.x = initialPos.x;
 		this.pos.y = initialPos.y;

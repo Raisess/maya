@@ -5,8 +5,9 @@ const game: Canvas = new Canvas();
 
 const player: Entity = new Entity(
 	"Player",
-	"*o*",
-	{ x: 10, y: 30 },
+	"blue",
+	{ width: 30, height: 30 },
+	{ x: 10, y: 10 },
 	true
 );
 
