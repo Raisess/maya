@@ -1,4 +1,4 @@
-import Scene, { ISceneEntity } from "./engine/Scene";
+import Scene from "./engine/Scene";
 import Entity from "./engine/Entity";
 
 const scene: Scene = new Scene();
@@ -9,21 +9,18 @@ const player: Entity = new Entity(
 	{ width: 40, height: 50 },
 	{ x: 10, y: 10 }
 );
-const playerEntity: ISceneEntity = scene.addEntity(player);
+
+scene.addEntity(player);
 
 document.addEventListener("keydown", (ev: KeyboardEvent): void => {
 	if (ev.key === "s") {
 		player.setY(player.getY() + 10);
-		playerEntity.update({ y: player.getY() });
 	} else if (ev.key === "w") {
 		player.setY(player.getY() - 10);
-		playerEntity.update({ y: player.getY() });
 	} else if (ev.key === "d") {
 		player.setX(player.getX() + 10);
-		playerEntity.update({ x: player.getX() });
 	} else if (ev.key === "a") {
 		player.setX(player.getX() - 10);
-		playerEntity.update({ x: player.getX() });
 	}
 });
 
@@ -33,23 +30,20 @@ const enemy: Entity = new Entity(
 	{ width: 40, height: 50 },
 	{ x: 60, y: 300 }
 );
-const enemyEntity: ISceneEntity = scene.addEntity(enemy);
+
+scene.addEntity(enemy);
 
 setInterval((): void => {
 	if (enemy.getX() > player.getX()) {
 		enemy.setX(enemy.getX() - 10);
-		enemyEntity.update({ x: enemy.getX() });
 	} else if (enemy.getX() < player.getX()) {
 		enemy.setX(enemy.getX() + 10);
-		enemyEntity.update({ x: enemy.getX() });
 	}
 
 	if (enemy.getY() > player.getY()) {
 		enemy.setY(enemy.getY() - 10);
-		enemyEntity.update({ x: enemy.getY() });
 	} else if (enemy.getY() < player.getY()) {
 		enemy.setY(enemy.getY() + 10);
-		enemyEntity.update({ x: enemy.getY() });
 	}
 }, 100);
 
