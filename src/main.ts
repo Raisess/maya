@@ -1,5 +1,5 @@
-import Scene, { ISceneEntity } from "./Scene";
-import Entity from "./Entity";
+import Scene, { ISceneEntity } from "./engine/Scene";
+import Entity from "./engine/Entity";
 
 const scene: Scene = new Scene();
 
