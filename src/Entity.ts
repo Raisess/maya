@@ -19,7 +19,7 @@ export interface IEntity {
 	pos:   EntityPos;
 
 	getName(): string;
-	getDraw(): string;
+	getDraw(): HTMLImageElement;
 }
 
 export default class Entity implements IEntity {
@@ -47,8 +47,12 @@ export default class Entity implements IEntity {
 		return this.props.name;
 	}
 
-	public getDraw(): string {
-		return this.props.draw;
+	public getDraw(): HTMLImageElement {
+		const image: HTMLImageElement = new Image();
+
+		image.src = this.props.draw;
+
+		return image;
 	}
 }
 
