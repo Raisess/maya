@@ -11,14 +11,14 @@ export default class Scene implements IScene {
 
 	private entities: Array<IEntity> = [];
 
-	constructor() {
+	constructor(updateTime: number = 10) {
 		// clear scene when starts
 		this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
 		// update scene in every 100ms
 		setInterval((): void => {
 			this.update();
-		}, 10);
+		}, updateTime);
 	}
 
 	private update(): void {
