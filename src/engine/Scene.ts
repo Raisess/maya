@@ -1,9 +1,5 @@
-import { IEntity } from "./Entity";
-
-export interface IScene {
-	addEntity(entity: IEntity):      void;
-	destroyEntity(entityId: string): void;
-}
+import IScene from "./interfaces/IScene";
+import IEntity from "./interfaces/IEntity";
 
 export default class Scene implements IScene {
 	private readonly canvas: HTMLCanvasElement        = (document.getElementById("gameCanvas")! as HTMLCanvasElement);
