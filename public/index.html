@@ -2,15 +2,12 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
     <meta
       name="description"
-      content="Web site created using create-react-app"
+      content="Game developed using Maya engine."
     />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
 		<style>
 			body {
 			  margin: 0;
@@ -21,6 +18,7 @@
 			  -moz-osx-font-smoothing: grayscale;
 				width: 100vw;
 				height: 100vh;
+				overflow: hidden;
 			}
 
 			code {
@@ -29,6 +27,8 @@
 			}
 
 			canvas {
+				width: 99.7vw;
+				height: 99.4vh;
 				border: solid 2px #000;
 			}
 		</style>
@@ -36,7 +36,7 @@
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <canvas id="gameCanvas" width="800" height="600"></canvas>
+    <canvas id="gameCanvas" width="1080" height="720"></canvas>
     <div id="root">
 		</div>
   </body>
