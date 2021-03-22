@@ -43,7 +43,7 @@ export default class Scene implements IScene {
 		}
 	}
 
-	public addEntity(entity: IEntity): any {
+	public addEntity(entity: IEntity): ISceneEntity {
 		this.entities.push(entity);
 	  this.ctx.drawImage(entity.getDraw(), entity.getX(), entity.getY(), entity.getWidth(), entity.getHeight());
 
