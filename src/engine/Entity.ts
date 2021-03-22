@@ -52,13 +52,12 @@ export default class Entity implements IEntity {
 
 	private pos: EntityPos = { x: 0, y: 0 };
 
-	constructor(name: string, draw: string, size: EntitySize, initialPos: EntityPos) {
+	constructor(name: string, draw: string, size: EntitySize, pos: EntityPos) {
 		this.props.name = name;
 		this.props.draw = draw;
 		this.props.size = size;
 
-		this.pos.x = initialPos.x;
-		this.pos.y = initialPos.y;
+		this.pos = pos;
 	}
 
 	public setName(name: string): void {
