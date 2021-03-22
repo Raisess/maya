@@ -5,7 +5,7 @@ export default class Canvas {
 
 	constructor() {
 		this.ctx.font = "30px Arial";
-		this.ctx.fillText("Hello World", 10, 50);
+		this.ctx.fillText("Hello World", 10, 30);
 
 		console.log("yo");
 	}
