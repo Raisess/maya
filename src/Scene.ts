@@ -6,7 +6,8 @@ type SceneEntityPos = {
 };
 
 export interface ISceneEntity {
-	update: (pos: SceneEntityPos) => void;
+	update:  (pos: SceneEntityPos) => void;
+	destroy: ()                    => void;
 }
 
 export interface IScene {
@@ -23,6 +24,25 @@ export default class Scene implements IScene {
 	constructor() {
 		// clear scene when starts
 		this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+		// update scene in every 100ms
+		setInterval((): void => {
+			this.update();
+		}, 100);
+	}
+
+	private update(): void {
+		this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+		for (let i: number = 0; i < this.entities.length; i++) {
+			if (this.entities[i] !== undefined) {
+				const ent: IEntity = this.entities[i];
+
+				this.ctx.fillStyle = ent.getDraw();
+
+				this.ctx.fillRect(ent.pos.x, ent.pos.y, ent.props.size.width, ent.props.size.height);
+			}
+		}
 	}
 
 	public addEntity(entity: IEntity): any {
@@ -31,25 +51,32 @@ export default class Scene implements IScene {
 
 		this.entities.push(entity);
 
+		const name: string = entity.getName();
+
 		return {
 			update: (pos: SceneEntityPos): void => {
-				const name: string = entity.getName();
-
 				this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
 				for (let i: number = 0; i < this.entities.length; i++) {
-					const ent: IEntity = this.entities[i];
+					if (this.entities[i] !== undefined) {
+						const ent: IEntity = this.entities[i];
 
-					this.ctx.fillStyle = ent.getDraw();
+						this.ctx.fillStyle = ent.getDraw();
 
-					if (ent.getName() === name) {
-						this.entities[i].pos.x = pos.x || ent.pos.x;
-						this.entities[i].pos.y = pos.y || ent.pos.y;
+						if (ent.getName() === name) {
+							this.entities[i].pos.x = pos.x || ent.pos.x;
+							this.entities[i].pos.y = pos.y || ent.pos.y;
 
-		  			this.ctx.fillRect(this.entities[i].pos.x, this.entities[i].pos.y, ent.props.size.width, ent.props.size.height);
-					} else {
-		  			this.ctx.fillRect(ent.pos.x, ent.pos.y, ent.props.size.width, ent.props.size.height);
+							this.ctx.fillRect(this.entities[i].pos.x, this.entities[i].pos.y, ent.props.size.width, ent.props.size.height);
+						} else {
+							this.ctx.fillRect(ent.pos.x, ent.pos.y, ent.props.size.width, ent.props.size.height);
+						}
 					}
+				}
+			},
+			destroy: (): void => {
+				for (let i: number = 0; i < this.entities.length; i++) {
+					if (this.entities[i].getName() === name) delete this.entities[i];
 				}
 			}
 		}

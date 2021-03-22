@@ -7,8 +7,7 @@ const player: Entity = new Entity(
 	"Player",
 	"blue",
 	{ width: 30, height: 30 },
-	{ x: 10, y: 10 },
-	true
+	{ x: 10, y: 10 }
 );
 const playerEntity: ISceneEntity = scene.addEntity(player);
 
