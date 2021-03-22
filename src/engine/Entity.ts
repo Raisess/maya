@@ -1,3 +1,5 @@
+import { v4 as uuid } from "uuid";
+
 export type EntitySize = {
 	width:  number;
 	height: number;
@@ -15,6 +17,8 @@ export type EntityPos = {
 };
 
 export interface IEntity {
+	id: string;
+
 	setName(name: string): void;
 	setDraw(draw: string): void;
 
@@ -35,6 +39,8 @@ export interface IEntity {
 }
 
 export default class Entity implements IEntity {
+	public readonly id: string = uuid();
+
 	private props: EntityProps = {
 		name: "",
 		draw: "",

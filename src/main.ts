@@ -47,7 +47,7 @@ setInterval((): void => {
 	}
 
 	if (enemy.getY() === player.getY() && enemy.getX() === player.getX()) {
-		scene.destroyEntity("Enemy");
+		scene.destroyEntity(enemy.id);
 	}
 }, 100);
 

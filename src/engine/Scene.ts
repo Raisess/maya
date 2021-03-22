@@ -1,8 +1,8 @@
 import { IEntity } from "./Entity";
 
 export interface IScene {
-	addEntity(entity: IEntity):        void;
-	destroyEntity(entityName: string): void;
+	addEntity(entity: IEntity):      void;
+	destroyEntity(entityId: string): void;
 }
 
 export default class Scene implements IScene {
@@ -38,10 +38,10 @@ export default class Scene implements IScene {
 		this.ctx.drawImage(entity.getDraw(), entity.getX(), entity.getY(), entity.getWidth(), entity.getHeight());
 	}
 
-	public destroyEntity(entityName: string): void {
+	public destroyEntity(entityId: string): void {
 		for (let i: number = 0; i < this.entities.length; i++) {
 			if (this.entities[i] !== undefined) {
-				if (this.entities[i].getName() === entityName) delete this.entities[i];
+				if (this.entities[i].id === entityId) delete this.entities[i];
 			}
 		}
 	}
