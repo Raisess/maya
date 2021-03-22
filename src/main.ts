@@ -11,5 +11,16 @@ const player: Entity = new Entity(
 	true
 );
 
-game.addEntity(player);
+const enemy: Entity = new Entity(
+	"Enemy",
+	"red",
+	{ width: 30, height: 30 },
+	{ x: 60, y: 10 }
+);
+
+const playerEntity: any = game.addEntity(player);
+
+playerEntity.update({ x: 10, y: 100 });
+
+game.addEntity(enemy);
 
