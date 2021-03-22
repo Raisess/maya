@@ -6,9 +6,8 @@ export interface IScene {
 }
 
 export default class Scene implements IScene {
-	private readonly canvas: HTMLCanvasElement = (document.getElementById("gameCanvas")! as HTMLCanvasElement);
-
-	private ctx: CanvasRenderingContext2D = this.canvas.getContext("2d")!;
+	private readonly canvas: HTMLCanvasElement        = (document.getElementById("gameCanvas")! as HTMLCanvasElement);
+	private readonly ctx:    CanvasRenderingContext2D = this.canvas.getContext("2d")!;
 
 	private entities: Array<IEntity> = [];
 
