@@ -38,15 +38,14 @@ export default class Scene implements IScene {
 			if (this.entities[i] !== undefined) {
 				const ent: IEntity = this.entities[i];
 
-				this.ctx.drawImage(ent.getDraw(), ent.pos.x, ent.pos.y, ent.getWidth(), ent.getHeight());
+				this.ctx.drawImage(ent.getDraw(), ent.getX(), ent.getY(), ent.getWidth(), ent.getHeight());
 			}
 		}
 	}
 
 	public addEntity(entity: IEntity): any {
-	  this.ctx.drawImage(entity.getDraw(), entity.pos.x, entity.pos.y, entity.getWidth(), entity.getHeight());
-
 		this.entities.push(entity);
+	  this.ctx.drawImage(entity.getDraw(), entity.getX(), entity.getY(), entity.getWidth(), entity.getHeight());
 
 		const name: string = entity.getName();
 
@@ -59,12 +58,12 @@ export default class Scene implements IScene {
 						const ent: IEntity = this.entities[i];
 
 						if (ent.getName() === name) {
-							this.entities[i].pos.x = pos.x || ent.pos.x;
-							this.entities[i].pos.y = pos.y || ent.pos.y;
+							this.entities[i].setX(pos.x || ent.getX());
+							this.entities[i].setY(pos.y || ent.getY());
 
-							this.ctx.drawImage(ent.getDraw(), this.entities[i].pos.x, this.entities[i].pos.y, ent.getWidth(), ent.getHeight());
+							this.ctx.drawImage(ent.getDraw(), this.entities[i].getX(), this.entities[i].getY(), ent.getWidth(), ent.getHeight());
 						} else {
-							this.ctx.drawImage(ent.getDraw(), ent.pos.x, ent.pos.y, ent.getWidth(), ent.getHeight());
+							this.ctx.drawImage(ent.getDraw(), ent.getX(), ent.getY(), ent.getWidth(), ent.getHeight());
 						}
 					}
 				}

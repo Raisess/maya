@@ -15,12 +15,16 @@ export type EntityPos = {
 };
 
 export interface IEntity {
-	pos:   EntityPos;
-
 	getName():   string;
 	getDraw():   HTMLImageElement;
 	getWidth():  number;
 	getHeight(): number;
+
+	setX(x: number): void;
+	setY(y: number): void;
+
+	getX(): number;
+	getY(): number;
 }
 
 export default class Entity implements IEntity {
@@ -33,7 +37,7 @@ export default class Entity implements IEntity {
 		}
 	};
 
-	public pos: EntityPos = { x: 0, y: 0 };
+	private pos: EntityPos = { x: 0, y: 0 };
 
 	constructor(name: string, draw: string, size: EntitySize, initialPos: EntityPos) {
 		this.props.name = name;
@@ -62,6 +66,22 @@ export default class Entity implements IEntity {
 
 	public getHeight(): number {
 		return this.props.size.height;
+	}
+
+	public setX(x: number): void {
+		this.pos.x = x;
+	}
+
+	public getX(): number {
+		return this.pos.x;
+	}
+
+	public setY(y: number): void {
+		this.pos.y = y;
+	}
+
+	public getY(): number {
+		return this.pos.y;
 	}
 }
 

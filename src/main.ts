@@ -13,13 +13,13 @@ const playerEntity: ISceneEntity = scene.addEntity(player);
 
 document.addEventListener("keydown", (ev: KeyboardEvent): void => {
 	if (ev.key === "s") {
-		playerEntity.update({ y: player.pos.y + 10 });
+		playerEntity.update({ y: player.getY() + 10 });
 	} else if (ev.key === "w") {
-		playerEntity.update({ y: player.pos.y - 10 });
+		playerEntity.update({ y: player.getY() - 10 });
 	} else if (ev.key === "d") {
-		playerEntity.update({ x: player.pos.x + 10 });
+		playerEntity.update({ x: player.getX() + 10 });
 	} else if (ev.key === "a") {
-		playerEntity.update({ x: player.pos.x - 10 });
+		playerEntity.update({ x: player.getX() - 10 });
 	}
 });
 
