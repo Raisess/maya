@@ -31,11 +31,11 @@ export interface IEntity {
 	getWidth():  number;
 	getHeight(): number;
 
-	setX(x: number): void;
-	setY(y: number): void;
+	setPosX(x: number): void;
+	setPosY(y: number): void;
 
-	getX(): number;
-	getY(): number;
+	getPosX(): number;
+	getPosY(): number;
 }
 
 export default class Entity implements IEntity {
@@ -97,19 +97,19 @@ export default class Entity implements IEntity {
 		return this.props.size.height;
 	}
 
-	public setX(x: number): void {
+	public setPosX(x: number): void {
 		this.pos.x = x;
 	}
 
-	public getX(): number {
+	public getPosX(): number {
 		return this.pos.x;
 	}
 
-	public setY(y: number): void {
+	public setPosY(y: number): void {
 		this.pos.y = y;
 	}
 
-	public getY(): number {
+	public getPosY(): number {
 		return this.pos.y;
 	}
 }

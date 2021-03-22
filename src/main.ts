@@ -14,13 +14,13 @@ scene.addEntity(player);
 
 document.addEventListener("keydown", (ev: KeyboardEvent): void => {
 	if (ev.key === "s") {
-		player.setY(player.getY() + 10);
+		player.setPosY(player.getPosY() + 10);
 	} else if (ev.key === "w") {
-		player.setY(player.getY() - 10);
+		player.setPosY(player.getPosY() - 10);
 	} else if (ev.key === "d") {
-		player.setX(player.getX() + 10);
+		player.setPosX(player.getPosX() + 10);
 	} else if (ev.key === "a") {
-		player.setX(player.getX() - 10);
+		player.setPosX(player.getPosX() - 10);
 	}
 });
 
@@ -34,19 +34,19 @@ const enemy: Entity = new Entity(
 scene.addEntity(enemy);
 
 setInterval((): void => {
-	if (enemy.getX() > player.getX()) {
-		enemy.setX(enemy.getX() - 10);
-	} else if (enemy.getX() < player.getX()) {
-		enemy.setX(enemy.getX() + 10);
+	if (enemy.getPosX() > player.getPosX()) {
+		enemy.setPosX(enemy.getPosX() - 10);
+	} else if (enemy.getPosX() < player.getPosX()) {
+		enemy.setPosX(enemy.getPosX() + 10);
 	}
 
-	if (enemy.getY() > player.getY()) {
-		enemy.setY(enemy.getY() - 10);
-	} else if (enemy.getY() < player.getY()) {
-		enemy.setY(enemy.getY() + 10);
+	if (enemy.getPosY() > player.getPosY()) {
+		enemy.setPosY(enemy.getPosY() - 10);
+	} else if (enemy.getPosY() < player.getPosY()) {
+		enemy.setPosY(enemy.getPosY() + 10);
 	}
 
-	if (enemy.getY() === player.getY() && enemy.getX() === player.getX()) {
+	if (enemy.getPosY() === player.getPosY() && enemy.getPosX() === player.getPosX()) {
 		scene.destroyEntity(enemy.id);
 	}
 }, 100);

@@ -26,16 +26,16 @@ export default class Scene implements IScene {
 
 		for (let i: number = 0; i < this.entities.length; i++) {
 			if (this.entities[i] !== undefined) {
-				const ent: IEntity = this.entities[i];
+				const entity: IEntity = this.entities[i];
 
-				this.ctx.drawImage(ent.getDraw(), ent.getX(), ent.getY(), ent.getWidth(), ent.getHeight());
+				this.ctx.drawImage(entity.getDraw(), entity.getPosX(), entity.getPosY(), entity.getWidth(), entity.getHeight());
 			}
 		}
 	}
 
 	public addEntity(entity: IEntity): void {
 		this.entities.push(entity);
-		this.ctx.drawImage(entity.getDraw(), entity.getX(), entity.getY(), entity.getWidth(), entity.getHeight());
+		this.ctx.drawImage(entity.getDraw(), entity.getPosX(), entity.getPosY(), entity.getWidth(), entity.getHeight());
 	}
 
 	public destroyEntity(entityId: string): void {
