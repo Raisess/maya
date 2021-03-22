@@ -15,15 +15,16 @@ export type EntityPos = {
 };
 
 export interface IEntity {
-	props: EntityProps;
 	pos:   EntityPos;
 
-	getName(): string;
-	getDraw(): HTMLImageElement;
+	getName():   string;
+	getDraw():   HTMLImageElement;
+	getWidth():  number;
+	getHeight(): number;
 }
 
 export default class Entity implements IEntity {
-	public props: EntityProps = {
+	private props: EntityProps = {
 		name: "",
 		draw: "",
 		size: {
@@ -53,6 +54,14 @@ export default class Entity implements IEntity {
 		image.src = this.props.draw;
 
 		return image;
+	}
+
+	public getWidth(): number {
+		return this.props.size.width;
+	}
+
+	public getHeight(): number {
+		return this.props.size.height;
 	}
 }
 

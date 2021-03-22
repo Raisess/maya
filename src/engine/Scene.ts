@@ -38,13 +38,13 @@ export default class Scene implements IScene {
 			if (this.entities[i] !== undefined) {
 				const ent: IEntity = this.entities[i];
 
-				this.ctx.drawImage(ent.getDraw(), ent.pos.x, ent.pos.y, ent.props.size.width, ent.props.size.height);
+				this.ctx.drawImage(ent.getDraw(), ent.pos.x, ent.pos.y, ent.getWidth(), ent.getHeight());
 			}
 		}
 	}
 
 	public addEntity(entity: IEntity): any {
-	  this.ctx.drawImage(entity.getDraw(), entity.pos.x, entity.pos.y, entity.props.size.width, entity.props.size.height);
+	  this.ctx.drawImage(entity.getDraw(), entity.pos.x, entity.pos.y, entity.getWidth(), entity.getHeight());
 
 		this.entities.push(entity);
 
@@ -62,9 +62,9 @@ export default class Scene implements IScene {
 							this.entities[i].pos.x = pos.x || ent.pos.x;
 							this.entities[i].pos.y = pos.y || ent.pos.y;
 
-							this.ctx.drawImage(ent.getDraw(), this.entities[i].pos.x, this.entities[i].pos.y, ent.props.size.width, ent.props.size.height);
+							this.ctx.drawImage(ent.getDraw(), this.entities[i].pos.x, this.entities[i].pos.y, ent.getWidth(), ent.getHeight());
 						} else {
-							this.ctx.drawImage(ent.getDraw(), ent.pos.x, ent.pos.y, ent.props.size.width, ent.props.size.height);
+							this.ctx.drawImage(ent.getDraw(), ent.pos.x, ent.pos.y, ent.getWidth(), ent.getHeight());
 						}
 					}
 				}
