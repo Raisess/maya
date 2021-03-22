@@ -1,7 +1,7 @@
-import Canvas from "./Canvas";
+import Scene, { ISceneEntity } from "./Scene";
 import Entity from "./Entity";
 
-const game: Canvas = new Canvas();
+const scene: Scene = new Scene();
 
 const player: Entity = new Entity(
 	"Player",
@@ -18,9 +18,11 @@ const enemy: Entity = new Entity(
 	{ x: 60, y: 10 }
 );
 
-const playerEntity: any = game.addEntity(player);
+const playerEntity: ISceneEntity = scene.addEntity(player);
 
 playerEntity.update({ x: 10, y: 100 });
 
-game.addEntity(enemy);
+const enemyEntity: ISceneEntity = scene.addEntity(enemy);
+
+enemyEntity.update({ x: 60, y: 300 });
 
