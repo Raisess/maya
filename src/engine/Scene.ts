@@ -11,7 +11,7 @@ export default class Scene implements IScene {
 		// clear scene when starts
 		this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-		// update scene in every 100ms
+		// update scene in every 10ms
 		setInterval((): void => {
 			this.update();
 		}, updateTime);
