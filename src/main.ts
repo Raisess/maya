@@ -1,53 +1,59 @@
 import Scene from "./engine/Scene";
 import Entity from "./engine/Entity";
+import Phisics from "./engine/Phisics";
 
-const scene: Scene = new Scene();
+const scene: Scene = new Scene({ width: 1080, height: 720 });
+
+const bg: Entity = new Entity(
+	"bg",
+	"https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpm1.narvii.com%2F6904%2F1ef7b698643b1eaf072414fa53df8977dda263e0r1-1919-1081v2_hq.jpg&f=1&nofb=1",
+	{ width: 1080, height: 720 },
+	{ x: 0, y: 0 },
+	"image"
+);
 
 const player: Entity = new Entity(
 	"Player",
 	"https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fvignette1.wikia.nocookie.net%2Fpixelpeople%2Fimages%2Fa%2Fa3%2FWizard2Female.png%2Frevision%2Flatest%3Fcb%3D20140918115845&f=1&nofb=1",
-	{ width: 40, height: 50 },
-	{ x: 10, y: 10 }
+	{ width: 60, height: 70 },
+	{ x: 10, y: 530 },
+	"image"
 );
 
+const block: Entity = new Entity(
+	"block",
+	"red",
+	{ width: 30, height: 40 },
+	{ x: 600, y: 10 },
+	"solid"
+);
+
+scene.addEntity(bg);
 scene.addEntity(player);
+scene.addEntity(block);
+
+Phisics.addGravity(block);
+Phisics.addGravity(player);
+
+
+
+const i: any = setInterval((): void => {
+	if(Phisics.isColliding(player, block)) {
+		clearInterval(i);
+		scene.destroyEntity(block.id);
+	}
+}, 20);
 
 document.addEventListener("keydown", (ev: KeyboardEvent): void => {
-	if (ev.key === "s") {
-		player.setPosY(player.getPosY() + 10);
-	} else if (ev.key === "w") {
-		player.setPosY(player.getPosY() - 10);
-	} else if (ev.key === "d") {
-		player.setPosX(player.getPosX() + 10);
-	} else if (ev.key === "a") {
-		player.setPosX(player.getPosX() - 10);
+	switch (ev.key) {
+		case " ": player.setPosY(player.getPosY() - 100);
+			break;
+		case "d": player.setPosX(player.getPosX() + 10);
+			break;
+		case "a": player.setPosX(player.getPosX() - 10);
+			break;
+		default:
+			break;
 	}
 });
-
-const enemy: Entity = new Entity(
-	"Enemy",
-	"https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fvignette.wikia.nocookie.net%2Fpixelpeople%2Fimages%2F9%2F96%2FZoologist2Male.png%2Frevision%2Flatest%3Fcb%3D20140918120503&f=1&nofb=1",
-	{ width: 40, height: 50 },
-	{ x: 60, y: 300 }
-);
-
-scene.addEntity(enemy);
-
-setInterval((): void => {
-	if (enemy.getPosX() > player.getPosX()) {
-		enemy.setPosX(enemy.getPosX() - 10);
-	} else if (enemy.getPosX() < player.getPosX()) {
-		enemy.setPosX(enemy.getPosX() + 10);
-	}
-
-	if (enemy.getPosY() > player.getPosY()) {
-		enemy.setPosY(enemy.getPosY() - 10);
-	} else if (enemy.getPosY() < player.getPosY()) {
-		enemy.setPosY(enemy.getPosY() + 10);
-	}
-
-	if (enemy.getPosY() === player.getPosY() && enemy.getPosX() === player.getPosX()) {
-		scene.destroyEntity(enemy.id);
-	}
-}, 100);
 
