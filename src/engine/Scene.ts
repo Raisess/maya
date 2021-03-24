@@ -20,18 +20,20 @@ export default class Scene implements IScene {
 	private update(): void {
 		this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-		for (let i: number = 0; i < this.entities.length; i++) {
-			if (this.entities[i] !== undefined) {
-				const entity: IEntity = this.entities[i];
-
-				this.rederizeEntity(entity);
-			}
+		for (const entity of this.entities) {
+			this.rederizeEntity(entity);
 		}
 	}
 
 	private rederizeEntity(entity: IEntity): void {
-		if (typeof entity.getDraw() !== "string") {
+		if (entity.type === "image") {
 			this.ctx.drawImage((entity.getDraw() as CanvasImageSource), entity.getPosX(), entity.getPosY(), entity.getWidth(), entity.getHeight());
+		} else if (entity.type === "text") {
+			const textProps: Array<string> = (entity.getDraw() as string).split(" ");
+
+			this.ctx.font      = textProps[1] + " " + textProps[2];
+			this.ctx.fillStyle = (textProps[0] as string);
+			this.ctx.fillText(entity.getName(), entity.getPosX(), entity.getPosY());	
 		} else {
 			this.ctx.fillStyle = (entity.getDraw() as string);
 			this.ctx.fillRect(entity.getPosX(), entity.getPosY(), entity.getWidth(), entity.getHeight());
@@ -45,11 +47,7 @@ export default class Scene implements IScene {
 	}
 
 	public destroyEntity(entityId: string): void {
-		for (let i: number = 0; i < this.entities.length; i++) {
-			if (this.entities[i] !== undefined) {
-				if (this.entities[i].id === entityId) delete this.entities[i];
-			}
-		}
+		this.entities = this.entities.filter((entity: IEntity): boolean => entity.id !== entityId);
 	}
 }
 

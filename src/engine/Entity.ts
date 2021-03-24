@@ -1,10 +1,10 @@
 import { v4 as uuid } from "uuid";
 
-import IEntity, { EntityProps, EntityPos, EntitySize } from "./interfaces/IEntity";
+import IEntity, { EntityType, EntityProps, EntityPos, EntitySize } from "./interfaces/IEntity";
 
 export default class Entity implements IEntity {
-	public readonly id:       string = uuid();
-	public readonly useImage: boolean;
+	public readonly id:   string = uuid();
+	public readonly type: EntityType;
 
 	private props: EntityProps = {
 		name: "",
@@ -17,13 +17,13 @@ export default class Entity implements IEntity {
 
 	private pos: EntityPos = { x: 0, y: 0 };
 
-	constructor(name: string, draw: string, size: EntitySize, pos: EntityPos, useImage: boolean = false) {
+	constructor(name: string, draw: string, size: EntitySize, pos: EntityPos, type: EntityType) {
 		this.props.name = name;
 		this.props.draw = draw;
 		this.props.size = size;
 
-		this.pos      = pos;
-		this.useImage = useImage;
+		this.pos  = pos;
+		this.type = type;
 	}
 
 	public setName(name: string): void {
@@ -39,7 +39,7 @@ export default class Entity implements IEntity {
 	}
 
 	public getDraw(): HTMLImageElement | string {
-		if (this.useImage) {
+		if (this.type === "image") {
 			const image: HTMLImageElement = new Image();
 
 			image.src = this.props.draw;

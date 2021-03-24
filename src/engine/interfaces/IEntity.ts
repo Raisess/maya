@@ -14,9 +14,11 @@ export type EntityPos = {
 	y: number;
 };
 
+export type EntityType = "image" | "text" | "solid";
+
 export default interface IEntity {
-	id:       string;
-	useImage: boolean;
+	id:   string;
+	type: EntityType;
 
 	setName(name: string): void;
 	setDraw(draw: string): void;
