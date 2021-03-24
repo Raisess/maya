@@ -1,4 +1,4 @@
-import IScene from "./interfaces/IScene";
+import IScene, { SceneProps } from "./interfaces/IScene";
 import IEntity from "./interfaces/IEntity";
 
 export default class Scene implements IScene {
@@ -15,6 +15,17 @@ export default class Scene implements IScene {
 		setInterval((): void => {
 			this.update();
 		}, updateTime);
+	}
+
+	public getProps(): SceneProps {
+		return {
+			currentEntities: this.entities,
+
+			size: {
+				width:  this.canvas.width,
+				height: this.canvas.height
+			}
+		}
 	}
 
 	private update(): void {
