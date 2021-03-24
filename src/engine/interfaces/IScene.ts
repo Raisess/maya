@@ -6,8 +6,8 @@ export type SceneProps = {
 };
 
 export default interface IScene {
-	addEntity(entity: IEntity):      void;
-	destroyEntity(entityId: string): void;
+	addEntity(entity: IEntity):     void;
+	destroyEntity(entity: IEntity): void;
 
 	getProps(): SceneProps;
 }

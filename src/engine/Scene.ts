@@ -63,8 +63,8 @@ export default class Scene implements IScene {
 		this.rederizeEntity(entity);
 	}
 
-	public destroyEntity(entityId: string): void {
-		this.entities = this.entities.filter((entity: IEntity): boolean => entity.id !== entityId);
+	public destroyEntity(entity: IEntity): void {
+		this.entities = this.entities.filter((ent: IEntity): boolean => ent.id !== entity.id);
 	}
 }
 
