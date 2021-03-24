@@ -15,13 +15,14 @@ export type EntityPos = {
 };
 
 export default interface IEntity {
-	id: string;
+	id:       string;
+	useImage: boolean;
 
 	setName(name: string): void;
 	setDraw(draw: string): void;
 
 	getName(): string;
-	getDraw(): HTMLImageElement;
+	getDraw(): HTMLImageElement | string;
 
 	setWidth(width: number):   void;
 	setHeight(height: number): void;
