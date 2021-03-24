@@ -2,30 +2,36 @@ import IScene, { SceneProps } from "./interfaces/IScene";
 import IEntity from "./interfaces/IEntity";
 
 export default class Scene implements IScene {
-	private readonly canvas: HTMLCanvasElement        = (document.getElementById("gameCanvas")! as HTMLCanvasElement);
+	private readonly canvas: HTMLCanvasElement        = (document.createElement("canvas")! as HTMLCanvasElement);
 	private readonly ctx:    CanvasRenderingContext2D = this.canvas.getContext("2d")!;
 
 	private entities: Array<IEntity> = [];
 
-	constructor(updateTime: number = 20) {
+	private props: SceneProps = {
+		width:  0,
+		height: 0
+	}
+
+	constructor(sceneProps: SceneProps) {
+		// add canvas to html
+		document.body.insertBefore(this.canvas, document.body.childNodes[0]);
+
+		this.props = sceneProps;
+		
+		this.canvas.width  = this.props.width;
+		this.canvas.height = this.props.height;
+
 		// clear scene when starts
 		this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
 		// update scene in every 20ms
 		setInterval((): void => {
 			this.update();
-		}, updateTime);
+		}, 20);
 	}
 
 	public getProps(): SceneProps {
-		return {
-			currentEntities: this.entities,
-
-			size: {
-				width:  this.canvas.width,
-				height: this.canvas.height
-			}
-		}
+		return this.props;
 	}
 
 	private update(): void {

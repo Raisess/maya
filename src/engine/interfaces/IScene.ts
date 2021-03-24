@@ -1,14 +1,8 @@
 import IEntity from "./IEntity";
 
-export type SceneSize = {
+export type SceneProps = {
 	width:  number;
 	height: number;
-};
-
-export type SceneProps = {
-	readonly currentEntities: Array<IEntity>;
-
-	size: SceneSize;
 };
 
 export default interface IScene {
