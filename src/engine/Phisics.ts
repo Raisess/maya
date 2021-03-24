@@ -6,7 +6,7 @@ export default class Phisics {
 		let   gravitySpeed: number = 0;
 
 		setInterval((): void => {
-			if ((Math.floor(entity.getPosY()) - 1) < (530 + (entity.getHeight() / 2))) {
+			if ((Math.floor(entity.getPosY()) - 1) < (600 - entity.getHeight())) {
 				gravitySpeed += gravity;
 
 				entity.setPosY(entity.getPosY() + gravitySpeed);
