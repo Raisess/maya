@@ -28,9 +28,18 @@ const block: Entity = new Entity(
 	"solid"
 );
 
+const text: Entity = new Entity(
+	"",
+	"blue 20px Arial",
+	{ width: 0, height: 0 },
+	{ x: 0, y: 0 },
+	"text"
+);
+
 scene.addEntity(bg);
 scene.addEntity(player);
 scene.addEntity(block);
+scene.addEntity(text);
 
 Phisics.addGravity(block);
 Phisics.addGravity(player);
@@ -40,7 +49,15 @@ Phisics.addGravity(player);
 const i: any = setInterval((): void => {
 	if(Phisics.isColliding(player, block)) {
 		clearInterval(i);
-		scene.destroyEntity(block.id);
+		text.setPosX(player.getPosX());
+		text.setPosY(player.getPosY());
+		text.setName("picked up!");
+
+		setTimeout((): void => {
+			scene.destroyEntity(text);
+		}, 700);
+
+		scene.destroyEntity(block);
 	}
 }, 20);
 
