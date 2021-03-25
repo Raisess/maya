@@ -1,6 +1,8 @@
 import IScene, { SceneProps } from "./interfaces/IScene";
 import IEntity from "./interfaces/IEntity";
 
+import Utils from "./Utils";
+
 export default class Scene implements IScene {
 	private readonly canvas: HTMLCanvasElement        = (document.createElement("canvas")! as HTMLCanvasElement);
 	private readonly ctx:    CanvasRenderingContext2D = this.canvas.getContext("2d")!;
@@ -24,10 +26,9 @@ export default class Scene implements IScene {
 		// clear scene when starts
 		this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-		// update scene in every 20ms
-		setInterval((): void => {
+		Utils.loop((): void => {
 			this.update();
-		}, 20);
+		});
 	}
 
 	public getProps(): SceneProps {

@@ -1,11 +1,13 @@
 import IEntity from "./interfaces/IEntity";
 
+import Utils from "./Utils";
+
 export default class Phisics {
 	public static addGravity(entity: IEntity, floorDistance: number): void {
 		const gravity:      number = 0.25;
 		let   gravitySpeed: number = 0;
 
-		setInterval((): void => {
+		Utils.loop((): void => {
 			if ((Math.floor(entity.getPosY())) < (floorDistance - entity.getHeight())) {
 				gravitySpeed += gravity;
 
@@ -14,7 +16,7 @@ export default class Phisics {
 				gravitySpeed = 0;
 				entity.setPosY(floorDistance - entity.getHeight());
 			}
-		}, 20);
+		});
 	}
 
 	public static isColliding(entityX: IEntity, entityY: IEntity): boolean {

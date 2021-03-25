@@ -1,6 +1,7 @@
 import Scene from "./engine/Scene";
 import Entity from "./engine/Entity";
 import Phisics from "./engine/Phisics";
+import Utils from "./engine/Utils";
 
 const scene: Scene = new Scene({ width: 1080, height: 720 });
 
@@ -46,9 +47,10 @@ const text: Entity = new Entity(
 
 scene.addEntity(text);
 
-const i: any = setInterval((): void => {
+const i: any = Utils.loop((): void => {
 	if(Phisics.isColliding(player, block)) {
-		clearInterval(i);
+		Utils.clearLoop(i);
+
 		text.setPosX(player.getPosX());
 		text.setPosY(player.getPosY());
 		text.setName("picked up!");
@@ -59,7 +61,7 @@ const i: any = setInterval((): void => {
 
 		scene.destroyEntity(block);
 	}
-}, 20);
+});
 
 scene.onKeyboardEvent((ev: KeyboardEvent): void => {
 	switch (ev.key) {
