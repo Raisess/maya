@@ -66,5 +66,9 @@ export default class Scene implements IScene {
 	public destroyEntity(entity: IEntity): void {
 		this.entities = this.entities.filter((ent: IEntity): boolean => ent.id !== entity.id);
 	}
+
+	public onEvent(event: keyof HTMLElementEventMap, callback: Function): void {
+		document.addEventListener(event, callback as any);
+	}
 }
 

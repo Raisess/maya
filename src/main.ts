@@ -12,13 +12,18 @@ const bg: Entity = new Entity(
 	"image"
 );
 
+scene.addEntity(bg);
+
 const player: Entity = new Entity(
 	"Player",
 	"https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fvignette1.wikia.nocookie.net%2Fpixelpeople%2Fimages%2Fa%2Fa3%2FWizard2Female.png%2Frevision%2Flatest%3Fcb%3D20140918115845&f=1&nofb=1",
-	{ width: 60, height: 70 },
+	{ width: 40, height: 50 },
 	{ x: 10, y: 530 },
 	"image"
 );
+
+scene.addEntity(player);
+Phisics.addGravity(player, 600);
 
 const block: Entity = new Entity(
 	"block",
@@ -28,6 +33,9 @@ const block: Entity = new Entity(
 	"solid"
 );
 
+scene.addEntity(block);
+Phisics.addGravity(block, 600);
+
 const text: Entity = new Entity(
 	"",
 	"blue 20px Arial",
@@ -36,15 +44,7 @@ const text: Entity = new Entity(
 	"text"
 );
 
-scene.addEntity(bg);
-scene.addEntity(player);
-scene.addEntity(block);
 scene.addEntity(text);
-
-Phisics.addGravity(block);
-Phisics.addGravity(player);
-
-
 
 const i: any = setInterval((): void => {
 	if(Phisics.isColliding(player, block)) {
@@ -61,9 +61,9 @@ const i: any = setInterval((): void => {
 	}
 }, 20);
 
-document.addEventListener("keydown", (ev: KeyboardEvent): void => {
+scene.onEvent("keydown", (ev: KeyboardEvent): void => {
 	switch (ev.key) {
-		case " ": player.setPosY(player.getPosY() - 100);
+		case "w": player.setPosY(player.getPosY() - 100);
 			break;
 		case "d": player.setPosX(player.getPosX() + 10);
 			break;

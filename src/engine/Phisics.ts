@@ -1,12 +1,12 @@
 import IEntity from "./interfaces/IEntity";
 
 export default class Phisics {
-	public static addGravity(entity: IEntity): void {
+	public static addGravity(entity: IEntity, floorDistance: number): void {
 		const gravity:      number = 0.10;
 		let   gravitySpeed: number = 0;
 
 		setInterval((): void => {
-			if ((Math.floor(entity.getPosY()) - 1) < (600 - entity.getHeight())) {
+			if ((Math.floor(entity.getPosY())) < (floorDistance - entity.getHeight())) {
 				gravitySpeed += gravity;
 
 				entity.setPosY(entity.getPosY() + gravitySpeed);
