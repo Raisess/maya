@@ -12,6 +12,7 @@ export default class Phisics {
 				entity.setPosY(entity.getPosY() + gravitySpeed);
 			} else {
 				gravitySpeed = 0;
+				entity.setPosY(floorDistance - entity.getHeight());
 			}
 		}, 20);
 	}
