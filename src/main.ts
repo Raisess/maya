@@ -61,7 +61,7 @@ const i: any = setInterval((): void => {
 	}
 }, 20);
 
-scene.onEvent("keydown", (ev: KeyboardEvent): void => {
+scene.onKeyboardEvent((ev: KeyboardEvent): void => {
 	switch (ev.key) {
 		case "w": player.setPosY(player.getPosY() - 100);
 			break;
