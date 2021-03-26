@@ -1,7 +1,7 @@
-import Scene from "./engine/Scene";
-import Entity from "./engine/Entity";
-import Phisics from "./engine/Phisics";
-import Utils from "./engine/Utils";
+import Scene from "../engine/Scene";
+import Entity from "../engine/Entity";
+import Phisics from "../engine/Phisics";
+import Utils from "../engine/Utils";
 
 const scene: Scene = new Scene({ width: 1080, height: 720 });
 
@@ -63,6 +63,8 @@ const i: any = Utils.loop((): void => {
 	}
 });
 
+let acc: number = 0;
+
 scene.onKeyboardEvent((ev: KeyboardEvent): void => {
 	switch (ev.key) {
 		case "w": player.setPosY(player.getPosY() - 100);
@@ -70,6 +72,32 @@ scene.onKeyboardEvent((ev: KeyboardEvent): void => {
 		case "d": player.setPosX(player.getPosX() + 10);
 			break;
 		case "a": player.setPosX(player.getPosX() - 10);
+			break;
+		case "k":
+			if (acc < 1) {
+				acc++;
+				const power: Entity = new Entity(
+					"power",
+					"blue",
+					{ width: 30, height: 40 },
+					{ x: -100, y: -100 },
+					"solid"
+				);
+
+				scene.addEntity(power);
+				power.setPosX(player.getPosX());
+				power.setPosY(player.getPosY());
+
+				const a: unknown = Utils.loop((): void => {
+					power.setPosX(power.getPosX() + 10);
+
+					if (power.getPosX() > 1080) {
+						scene.destroyEntity(power);
+						Utils.clearLoop(a);
+						acc--;
+					}
+				});
+			}
 			break;
 		default:
 			break;
