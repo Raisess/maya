@@ -68,12 +68,5 @@ export default class Scene implements IScene {
 
 		this.entities = this.entities.filter((ent: IEntity): boolean => ent.id !== entity.id);
 	}
-
-	public onKeyboardEvent(callback: Function): void {
-		window.addEventListener("keydown", (ev: KeyboardEvent): void => {
-			ev.preventDefault();
-			callback(ev);
-		});
-	}
 }
 

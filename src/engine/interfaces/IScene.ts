@@ -5,16 +5,10 @@ export type SceneProps = {
 	height: number;
 };
 
-interface KeyboardEventCallback {
-	(ev: KeyboardEvent): void;
-}
-
 export default interface IScene {
+	getProps(): SceneProps;
+
 	addEntity(entity: IEntity):     void;
 	destroyEntity(entity: IEntity): void;
-
-	onKeyboardEvent(callback: KeyboardEventCallback): void;
-
-	getProps(): SceneProps;
 }
 
