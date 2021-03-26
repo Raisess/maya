@@ -10,11 +10,12 @@ export default function playerControls(scene: IScene) {
 
 	Utils.onKeyboardEvent((ev: KeyboardEvent): void => {
 		switch (ev.key) {
-			case "w": player.setPosY(player.getPosY() - 100);
+			case "w":
+				if (player.getPosY() === (650 - player.getHeight()))	player.setPosY(player.getPosY() - 200);
 				break;
-			case "d": player.setPosX(player.getPosX() + 10);
+			case "d": player.setPosX(player.getPosX() + 20);
 				break;
-			case "a": player.setPosX(player.getPosX() - 10);
+			case "a": player.setPosX(player.getPosX() - 20);
 				break;
 			case "Escape": window.location.reload();
 				break;
@@ -38,7 +39,7 @@ export default function playerControls(scene: IScene) {
 				power.setPosY(player.getPosY() + ((player.getHeight() / 2) - 10));
 
 				const a: unknown = Utils.loop((): void => {
-					power.setPosX(power.getPosX() + 10);
+					power.setPosX(power.getPosX() + 5);
 
 					if (power.getPosX() > (player.getPosX() + 300)) {
 						scene.destroyEntity(power);
