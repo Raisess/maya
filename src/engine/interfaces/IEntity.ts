@@ -17,8 +17,8 @@ export type EntityPos = {
 export type EntityType = "image" | "text" | "solid";
 
 export default interface IEntity {
-	id:   string;
-	type: EntityType;
+	readonly id:   string;
+	readonly type: EntityType;
 
 	setName(name: string): void;
 	setDraw(draw: string): void;

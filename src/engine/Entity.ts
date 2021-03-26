@@ -5,7 +5,7 @@ import IEntity, { EntityType, EntityProps, EntityPos, EntitySize } from "./inter
 export default class Entity implements IEntity {
 	public readonly id:   string = uuid();
 	public readonly type: EntityType;
-
+	
 	private props: EntityProps = {
 		name: "",
 		draw: "",
