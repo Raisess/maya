@@ -1,8 +1,9 @@
 import IEntity from "./IEntity";
 
 export type SceneProps = {
-	width:  number;
-	height: number;
+	width:      number;
+	height:     number;
+	background: string;
 };
 
 export default interface IScene {

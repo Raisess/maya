@@ -2,6 +2,7 @@ import IScene, { SceneProps } from "./interfaces/IScene";
 import IEntity from "./interfaces/IEntity";
 
 import Utils from "./Utils";
+import Physics from "./Physics";
 
 export default class Scene implements IScene {
 	private readonly canvas: HTMLCanvasElement        = (document.createElement("canvas")! as HTMLCanvasElement);
@@ -10,8 +11,9 @@ export default class Scene implements IScene {
 	private entities: Array<IEntity> = [];
 
 	private props: SceneProps = {
-		width:  0,
-		height: 0
+		width:      0,
+		height:     0,
+		background: ""
 	}
 
 	constructor(sceneProps: SceneProps) {
@@ -36,11 +38,26 @@ export default class Scene implements IScene {
 		return this.props;
 	}
 
+	private setBackground(): void {
+		const image: HTMLImageElement = new Image();
+
+		image.src = this.props.background;
+
+		this.ctx.drawImage((image as CanvasImageSource), 0, 0, this.props.width, this.props.height);
+	}
+
 	private update(): void {
 		this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+		this.setBackground();
 
-		for (const entity of this.entities) {
-			this.rederizeEntity(entity);
+		for (const entityX of this.entities) {
+			for (const entityY of this.entities) {
+				if (entityX !== entityY) {
+					if (Physics.isColliding(entityX, entityY)) console.log(entityY.getName(), "is colliding with", entityX.getName());
+				}
+			}
+
+			this.rederizeEntity(entityX);
 		}
 	}
 
