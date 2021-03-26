@@ -3,54 +3,38 @@ import Entity from "../engine/Entity";
 import Physics from "../engine/Physics";
 import Utils from "../engine/Utils";
 
+import { bg, player, block, text } from "./entities";
+
+import { fps } from "./ui/fpsUI";
+
 const scene: Scene = new Scene({ width: 1080, height: 720 });
 
-const bg: Entity = new Entity(
-	"bg",
-	"https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpm1.narvii.com%2F6904%2F1ef7b698643b1eaf072414fa53df8977dda263e0r1-1919-1081v2_hq.jpg&f=1&nofb=1",
-	{ width: 1080, height: 720 },
-	{ x: 0, y: 0 },
-	"image"
-);
-
 scene.addEntity(bg);
-
-const player: Entity = new Entity(
-	"Player",
-	"https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fvignette1.wikia.nocookie.net%2Fpixelpeople%2Fimages%2Fa%2Fa3%2FWizard2Female.png%2Frevision%2Flatest%3Fcb%3D20140918115845&f=1&nofb=1",
-	{ width: 40, height: 50 },
-	{ x: 10, y: 530 },
-	"image"
-);
 
 scene.addEntity(player);
 Physics.addGravity(player);
 
-const block: Entity = new Entity(
-	"block",
-	"red",
-	{ width: 30, height: 40 },
-	{ x: 600, y: 10 },
-	"solid"
-);
-
 scene.addEntity(block);
 Physics.addGravity(block);
 
-const text: Entity = new Entity(
-	"",
-	"blue 20px Arial",
-	{ width: 0, height: 0 },
-	{ x: 0, y: 0 },
-	"text"
-);
-
 scene.addEntity(text);
 
-const i: any = Utils.loop((): void => {
-	if(Physics.isColliding(player, block)) {
-		Utils.clearLoop(i);
+let lastTime:  number = performance.now();
+let delta:     number = 0;
+let frames:    number = 0;
+let totalTime: number = 0;
 
+Utils.loop((): void => {
+	let now: number = performance.now();
+
+  delta      = now-lastTime;
+  lastTime   = now;
+  totalTime += delta;
+  frames++;
+
+	fps.innerHTML = "fps: " + (1000 * frames / totalTime).toFixed(2);
+
+	if(Physics.isColliding(player, block)) {
 		text.setPosX(player.getPosX());
 		text.setPosY(player.getPosY());
 		text.setName("picked up!");
