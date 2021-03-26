@@ -1,6 +1,6 @@
 import Scene from "../engine/Scene";
 import Entity from "../engine/Entity";
-import Phisics from "../engine/Phisics";
+import Physics from "../engine/Physics";
 import Utils from "../engine/Utils";
 
 const scene: Scene = new Scene({ width: 1080, height: 720 });
@@ -24,7 +24,7 @@ const player: Entity = new Entity(
 );
 
 scene.addEntity(player);
-Phisics.addGravity(player, 600);
+Physics.addGravity(player);
 
 const block: Entity = new Entity(
 	"block",
@@ -35,7 +35,7 @@ const block: Entity = new Entity(
 );
 
 scene.addEntity(block);
-Phisics.addGravity(block, 600);
+Physics.addGravity(block);
 
 const text: Entity = new Entity(
 	"",
@@ -48,7 +48,7 @@ const text: Entity = new Entity(
 scene.addEntity(text);
 
 const i: any = Utils.loop((): void => {
-	if(Phisics.isColliding(player, block)) {
+	if(Physics.isColliding(player, block)) {
 		Utils.clearLoop(i);
 
 		text.setPosX(player.getPosX());
@@ -95,13 +95,13 @@ Utils.onKeyboardEvent((ev: KeyboardEvent): void => {
 			const a: unknown = Utils.loop((): void => {
 				power.setPosX(power.getPosX() + 10);
 
-				if (power.getPosX() > (player.getPosX() + 300) || Phisics.isColliding(power, block)) {
+				if (power.getPosX() > (player.getPosX() + 300) || Physics.isColliding(power, block)) {
 					scene.destroyEntity(power);
 					Utils.clearLoop(a);
 					acc--;
 				}
 
-				if (Phisics.isColliding(power, block)) alert("a");
+				if (Physics.isColliding(power, block)) alert("a");
 			});
 		}
 	}
