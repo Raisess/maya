@@ -11,11 +11,11 @@ export default function playerControls(scene: IScene) {
 	Utils.onKeyboardEvent((ev: KeyboardEvent): void => {
 		switch (ev.key) {
 			case "w":
-				if (player.getPosY() === (650 - player.getHeight()))	player.setPosY(player.getPosY() - 200);
+				if (player.getPosY() === (650 - player.getHeight()))	player.setPosY(player.getPosY() - 100);
 				break;
-			case "d": player.setPosX(player.getPosX() + 20);
+			case "d": player.setPosX(player.getPosX() + 10);
 				break;
-			case "a": player.setPosX(player.getPosX() - 20);
+			case "a": player.setPosX(player.getPosX() - 10);
 				break;
 			case "Escape": window.location.reload();
 				break;
