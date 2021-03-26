@@ -40,7 +40,9 @@ for (const block of blocks) {
 
 	const loop: unknown = Utils.loop((): void => {
 		if (Physics.isColliding(player, block)) {
-			item.innerHTML     = "picked up: " + block.id + "!";
+			item.innerHTML     = "picked up: " + block.id;
+			item.style.left    = player.getPosX() + "px";
+			item.style.top     = (player.getPosY() - player.getHeight()) + "px";
 			item.style.display = "";
 
 			scene.destroyEntity(block);

@@ -15,10 +15,8 @@ fps.onclick = (): void => {
 	}
 }
 
-export const item: HTMLElement = new UIElement("h1").getElement();
+export const item: HTMLElement = new UIElement("p").getElement();
 
-item.style.top     = "30px";
-item.style.left    = "10px";
-item.style.color   = "white";
+item.style.color   = "blue";
 item.style.display = "none";
 
