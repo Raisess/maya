@@ -4,9 +4,16 @@ interface IKeyboardEventCallback {
 
 export default class Utils {
 	public static loop(callback: Function): unknown {
+		const lastTime: number = new Date().getTime();
+		let   delta:    number = 0;
+
 		return setInterval((): void => {
+			const now: number = new Date().getTime();
+
+			delta = now - lastTime;
+
 			callback();
-		}, 20);
+		}, 20 * delta);
 	}
 
 	public static clearLoop(loop: unknown): void {
