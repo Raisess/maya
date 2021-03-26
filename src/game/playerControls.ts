@@ -1,10 +1,9 @@
 import IScene from "../engine/interfaces/IScene";
 
 import Entity from "../engine/Entity";
-import Physics from "../engine/Physics";
 import Utils from "../engine/Utils";
 
-import { player, block } from "./entities";
+import { player } from "./entities";
 
 export default function playerControls(scene: IScene) {
 	let acc: number = 0;
@@ -16,6 +15,8 @@ export default function playerControls(scene: IScene) {
 			case "d": player.setPosX(player.getPosX() + 10);
 				break;
 			case "a": player.setPosX(player.getPosX() - 10);
+				break;
+			case "Escape": window.location.reload();
 				break;
 			default:
 				break;
@@ -39,13 +40,11 @@ export default function playerControls(scene: IScene) {
 				const a: unknown = Utils.loop((): void => {
 					power.setPosX(power.getPosX() + 10);
 
-					if (power.getPosX() > (player.getPosX() + 300) || Physics.isColliding(power, block)) {
+					if (power.getPosX() > (player.getPosX() + 300)) {
 						scene.destroyEntity(power);
 						Utils.clearLoop(a);
 						acc--;
 					}
-
-					if (Physics.isColliding(power, block)) alert("a");
 				});
 			}
 		}

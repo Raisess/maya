@@ -8,19 +8,20 @@ export const player: Entity = new Entity(
 	"image"
 );
 
-export const block: Entity = new Entity(
-	"block",
-	"red",
-	{ width: 30, height: 40 },
-	{ x: 600, y: 10 },
-	"solid"
-);
-
-export const text: Entity = new Entity(
-	"",
-	"blue 20px Arial",
-	{ width: 0, height: 0 },
-	{ x: 0, y: 0 },
-	"text"
-);
+export const blocks: Array<Entity> = [
+	new Entity(
+		"block",
+		"red",
+		{ width: 30, height: 40 },
+		{ x: 600, y: 10 },
+		"solid"
+	),
+	new Entity(
+		"block2",
+		"green",
+		{ width: 30, height: 40 },
+		{ x: 700, y: 10 },
+		"solid"
+	)
+];
 

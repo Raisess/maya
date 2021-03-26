@@ -2,9 +2,9 @@ import Scene from "../engine/Scene";
 import Physics from "../engine/Physics";
 import Utils from "../engine/Utils";
 
-import { player, block, text } from "./entities";
+import { player, blocks } from "./entities";
 
-import { fps } from "./ui/fpsUI";
+import { fps, item } from "./ui";
 
 import playerControls from "./playerControls";
 
@@ -14,11 +14,6 @@ playerControls(scene);
 
 scene.addEntity(player);
 Physics.addGravity(player);
-
-scene.addEntity(block);
-Physics.addGravity(block);
-
-scene.addEntity(text);
 
 // fps init
 let lastTime:  number = performance.now();
@@ -39,20 +34,24 @@ Utils.loop((): void => {
 });
 
 // block loop
-const loop: unknown = Utils.loop((): void => {
-	if (Physics.isColliding(player, block)) {
-		text.setPosX(player.getPosX());
-		text.setPosY(player.getPosY());
-		text.setName("picked up!");
+for (const block of blocks) {
+	scene.addEntity(block);
+	Physics.addGravity(block);
 
-		setTimeout((): void => {
-			console.log(player);
-			scene.destroyEntity(text);
+	const loop: unknown = Utils.loop((): void => {
+		if (Physics.isColliding(player, block)) {
+			item.innerHTML = "picked up: " + block.id + "!";
+			item.style.display = "";
 
-			Utils.clearLoop(loop);
-		}, 700);
+			scene.destroyEntity(block);
+			blocks.pop();
 
-		scene.destroyEntity(block);
-	}
-});
+			setTimeout((): void => {
+				item.style.display = "none";
+
+				Utils.clearLoop(loop);
+			}, 700);
+		}
+	});
+}
 
