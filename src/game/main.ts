@@ -30,7 +30,7 @@ Utils.loop((): void => {
   totalTime += delta;
   frames++;
 
-	fps.innerHTML = "fps: " + (1000 * frames / totalTime).toFixed(2);
+	fps.innerHTML = "fps: " + Math.floor(1000 * (frames / totalTime));
 });
 
 // block loop
@@ -40,7 +40,7 @@ for (const block of blocks) {
 
 	const loop: unknown = Utils.loop((): void => {
 		if (Physics.isColliding(player, block)) {
-			item.innerHTML = "picked up: " + block.id + "!";
+			item.innerHTML     = "picked up: " + block.id + "!";
 			item.style.display = "";
 
 			scene.destroyEntity(block);
