@@ -74,7 +74,7 @@ Utils.onKeyboardEvent((ev: KeyboardEvent): void => {
 
 			scene.addEntity(power);
 			power.setPosX(player.getPosX());
-			power.setPosY(player.getPosY());
+			power.setPosY(player.getPosY() + ((player.getHeight() / 2) - 10));
 
 			const a: unknown = Utils.loop((): void => {
 				power.setPosX(power.getPosX() + 10);

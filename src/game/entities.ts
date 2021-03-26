@@ -10,7 +10,7 @@ export const bg: Entity = new Entity(
 
 export const player: Entity = new Entity(
 	"Player",
-	"https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2F1.bp.blogspot.com%2F--GoXwf8Guu4%2FUdE0AHic0OI%2FAAAAAAAAARw%2Fm7mg9vBCcbc%2Fs437%2FThief.png&f=1&nofb=1",
+	"https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fstatic.tvtropes.org%2Fpmwiki%2Fpub%2Fimages%2Fmaplestory-warrior_9070.png&f=1&nofb=1",
 	{ width: 60, height: 90 },
 	{ x: 10, y: 530 },
 	"image"
