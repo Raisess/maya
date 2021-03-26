@@ -65,6 +65,8 @@ export default class Scene implements IScene {
 	}
 
 	public destroyEntity(entity: IEntity): void {
+		entity.destroy();
+
 		this.entities = this.entities.filter((ent: IEntity): boolean => ent.id !== entity.id);
 	}
 

@@ -37,5 +37,7 @@ export default interface IEntity {
 
 	getPosX(): number;
 	getPosY(): number;
+
+	destroy(): void;
 }
 

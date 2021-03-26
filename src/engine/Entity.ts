@@ -81,5 +81,13 @@ export default class Entity implements IEntity {
 	public getPosY(): number {
 		return this.pos.y;
 	}
+
+	public destroy(): void {
+		this.props.size.width  = 0;
+		this.props.size.height = 0;
+
+		this.pos.x = -1000;
+		this.pos.y = -1000;
+	}
 }
 
