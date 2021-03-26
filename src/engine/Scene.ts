@@ -26,6 +26,7 @@ export default class Scene implements IScene {
 		// clear scene when starts
 		this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
+		// game loop
 		Utils.loop((): void => {
 			this.update();
 		});
@@ -36,13 +37,11 @@ export default class Scene implements IScene {
 	}
 
 	private update(): void {
-		this.ctx.save();
+		this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
 		for (const entity of this.entities) {
 			this.rederizeEntity(entity);
 		}
-
-		this.ctx.restore();
 	}
 
 	private rederizeEntity(entity: IEntity): void {
@@ -62,8 +61,6 @@ export default class Scene implements IScene {
 
 	public addEntity(entity: IEntity): void {
 		this.entities.push(entity);
-
-		this.rederizeEntity(entity);
 	}
 
 	public destroyEntity(entity: IEntity): void {
