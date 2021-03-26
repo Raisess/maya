@@ -3,7 +3,7 @@ import IEntity from "./interfaces/IEntity";
 import Utils from "./Utils";
 
 export default class Physics {
-	public static addGravity(entity: IEntity, floorDistance: number = 600): void {
+	public static addGravity(entity: IEntity, floorDistance: number = 650): void {
 		const gravity:      number = 0.25;
 		let   gravitySpeed: number = 0;
 
