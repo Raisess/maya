@@ -4,7 +4,7 @@ import Utils from "./Utils";
 
 export default class Physics {
 	public static addGravity(entity: IEntity, floorDistance: number = 650): void {
-		const gravity:      number = 0.25;
+		const gravity:      number = 0.5;
 		let   gravitySpeed: number = 0;
 
 		Utils.loop((): void => {
