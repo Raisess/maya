@@ -6,7 +6,7 @@ export default class UIElement {
 
 		this.element.style.position = "absolute";
 
-		document.body.insertBefore(this.element, document.body.childNodes[0]);
+		document.body.insertBefore(this.element, document.querySelector("noscript"));
 	}
 
 	public getElement(): HTMLElement {
