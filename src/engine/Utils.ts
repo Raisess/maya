@@ -13,7 +13,7 @@ export default class Utils {
 			delta = now - lastTime;
 
 			callback();
-		}, 20 * delta);
+		}, 50 * delta);
 	}
 
 	public static clearLoop(loop: unknown): void {
