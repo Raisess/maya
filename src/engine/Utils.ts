@@ -21,7 +21,7 @@ export default class Utils {
 	}
 
 	public static onKeyboardEvent(callback: IKeyboardEventCallback): void {
-		window.addEventListener("keydown", (ev: KeyboardEvent): void => {
+		document.addEventListener("keydown", (ev: KeyboardEvent): void => {
 			ev.preventDefault();
 
 			callback(ev);
