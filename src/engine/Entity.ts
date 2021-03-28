@@ -1,6 +1,7 @@
 import { v4 as uuid } from "uuid";
 
 import IEntity, { EntityType, EntityProps, EntityPos, EntitySize } from "./interfaces/IEntity";
+import Physics from "./Physics";
 
 export default class Entity implements IEntity {
 	public readonly id:   string = uuid();
@@ -17,13 +18,17 @@ export default class Entity implements IEntity {
 
 	private pos: EntityPos = { x: 0, y: 0 };
 
-	constructor(name: string, draw: string, size: EntitySize, pos: EntityPos, type: EntityType) {
+	constructor(name: string, draw: string, size: EntitySize, pos: EntityPos, type: EntityType, gravity?: boolean) {
 		this.props.name = name;
 		this.props.draw = draw;
 		this.props.size = size;
 
 		this.pos  = pos;
 		this.type = type;
+
+		if (gravity === true || gravity === undefined) {
+			Physics.addGravity(this);
+		}
 	}
 
 	public setName(name: string): void {
