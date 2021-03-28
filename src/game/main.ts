@@ -13,7 +13,6 @@ const scene: Scene = new Scene({ width: 1080, height: 720, background: "https://
 playerControls(scene);
 
 scene.addEntity(player);
-Physics.addGravity(player);
 
 // fps init
 let lastTime:  number = performance.now();
@@ -36,7 +35,6 @@ Utils.loop((): void => {
 // block loop
 for (const block of blocks) {
 	scene.addEntity(block);
-	Physics.addGravity(block);
 
 	const loop: unknown = Utils.loop((): void => {
 		if (Physics.isColliding(player, block)) {

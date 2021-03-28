@@ -35,7 +35,7 @@ export default function playerControls(scene: IScene) {
 				);
 
 				scene.addEntity(power);
-				power.setPosX(player.getPosX() + player.getWidth() + 10);
+				power.setPosX(player.getPosX() + (player.getWidth() + 10));
 				power.setPosY(player.getPosY() + ((player.getHeight() / 2) - 10));
 
 				const a: unknown = Utils.loop((): void => {
