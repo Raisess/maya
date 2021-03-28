@@ -24,10 +24,6 @@ export default class Scene implements IScene {
 		this.canvas.width  = this.props.width;
 		this.canvas.height = this.props.height;
 
-		// clear scene when starts
-		this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-
-		// game loop
 		Utils.loop((): void => {
 			this.update();
 		});
@@ -42,7 +38,7 @@ export default class Scene implements IScene {
 
 		image.src = this.props.background;
 
-		this.ctx.drawImage((image as CanvasImageSource), 0, 0, this.props.width, this.props.height);
+		this.ctx.drawImage((image as CanvasImageSource), 0, 0, this.canvas.width, this.canvas.height);
 	}
 
 	private update(): void {
