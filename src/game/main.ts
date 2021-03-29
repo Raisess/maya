@@ -12,25 +12,32 @@ const scene: Scene = new Scene({ width: 800, height: 720, background: "https://e
 
 // center player on scene
 player.setPosX(400 - player.getWidth());
-player.setPosY((720 / 2) - player.getHeight());
+player.setPosY((720 / 2) - (player.getHeight() / 2));
 
 scene.addEntity(player);
 
+type Direction = "LEFT" | "RIGHT";
+
 // meteors generator
-let meteors: Array<Entity> = [];
+let meteors: Array<[Entity, Direction]> = [];
 
 for (let i: number = 0; i < 20; i++) {
-	meteors.push(new Entity(
-		"meteor",
-		"https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fclipart-library.com%2Fimages_k%2Fasteroid-transparent%2Fasteroid-transparent-5.png&f=1&nofb=1",
-		{ width: 20, height: 35 },
-		{ x: Math.round(Math.random() * 800), y: Math.round(Math.random() * 720) },
-		"image",
-		false
-	));
+	meteors.push([
+		new Entity(
+			"meteor",
+			"https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fclipart-library.com%2Fimages_k%2Fasteroid-transparent%2Fasteroid-transparent-5.png&f=1&nofb=1",
+			{ width: 20, height: 35 },
+			{ x: Math.round(Math.random() * 800), y: Math.round(Math.random() * 720) },
+			"image",
+			false
+		),
+		Math.round(Math.random()) === 0 ? "LEFT" : "RIGHT"
+	]);
 }
 
-for (const meteor of meteors) {
+for (const meteorCouple of meteors) {
+	const meteor: Entity = meteorCouple[0];
+
 	scene.addEntity(meteor);
 
 	Physics.addGravity(meteor, 0.05, 720, (): void => {
@@ -46,12 +53,21 @@ Utils.loop((): void => {
 
 	pointsCount += 0.1;
 
-	for (const meteor of meteors) {
+	for (const meteorCouple of meteors) {
+		const meteor:    Entity    = meteorCouple[0];
+		const direction: Direction = meteorCouple[1];
+
 		// movement meteor
-		meteor.setPosX(meteor.getPosX() + 0.5);
+		if (direction === "RIGHT") {
+			meteor.setPosX(meteor.getPosX() + 0.5);
+		} else {
+			meteor.setPosX(meteor.getPosX() - 0.5);
+		}
 
 		// teleport meteor when touch scene borders
 		if (meteor.getPosX() > (800 + player.getWidth())) meteor.setPosX(0 - player.getWidth());
+		if (meteor.getPosX() < (0 - player.getWidth())) meteor.setPosX(800 - player.getWidth());
+
 
 		// check player/meteor collision
 		if (Physics.isColliding(player, meteor)) window.location.reload();
