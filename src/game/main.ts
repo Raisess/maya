@@ -49,9 +49,9 @@ for (const meteorCouple of meteors) {
 let pointsCount: number = 0;
 
 const gameLoop: unknown = Utils.loop((): void => {
-	points.innerHTML = "Points: " + pointsCount;
+	points.innerHTML = "Points: " + Math.floor(pointsCount);
 
-	pointsCount = Math.floor(pointsCount + 0.1);
+	pointsCount += 0.1;
 
 	for (const meteorCouple of meteors) {
 		const meteor:    Entity    = meteorCouple[0];
@@ -73,7 +73,7 @@ const gameLoop: unknown = Utils.loop((): void => {
 		if (Physics.isColliding(player, meteor)) {
 			Utils.clearLoop(gameLoop);
 
-			alert("F, your score was: " + pointsCount);
+			alert("F, your score was: " + Math.floor(pointsCount));
 			window.location.reload();
 		}
 	}
