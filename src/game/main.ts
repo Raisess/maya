@@ -73,7 +73,7 @@ const gameLoop: unknown = Utils.loop((): void => {
 		if (Physics.isColliding(player, meteor)) {
 			Utils.clearLoop(gameLoop);
 
-			alert("F, score was " + pointsCount);
+			alert("F, your score was: " + pointsCount);
 			window.location.reload();
 		}
 	}
