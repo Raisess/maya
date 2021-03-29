@@ -3,18 +3,19 @@ import IEntity from "./interfaces/IEntity";
 import Utils from "./Utils";
 
 export default class Physics {
-	public static addGravity(entity: IEntity, floorDistance: number = 650): void {
-		const gravity:      number = 0.1;
-		let   gravitySpeed: number = 0;
+	public static addGravity(entity: IEntity, gravityForce: number = 0.1, floorDistance: number = 650, callback?: () => void): void {
+		let gravitySpeed: number = 0;
 
 		Utils.loop((): void => {
-			if ((Math.floor(entity.getPosY())) < (floorDistance - entity.getHeight())) {
-				gravitySpeed += gravity;
+			if (Math.floor(entity.getPosY()) < (floorDistance - entity.getHeight())) {
+				gravitySpeed += gravityForce;
 
 				entity.setPosY(entity.getPosY() + gravitySpeed);
 			} else {
 				gravitySpeed = 0;
 				entity.setPosY(floorDistance - entity.getHeight());
+
+				if (callback) callback();
 			}
 		});
 	}
