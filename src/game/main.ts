@@ -1,57 +1,64 @@
 import Scene from "../engine/Scene";
+import Entity from "../engine/Entity";
 import Physics from "../engine/Physics";
 import Utils from "../engine/Utils";
 
-import { player, blocks } from "./entities";
+import { points } from "./ui";
+import { player } from "./entities";
 
-import { fps, item } from "./ui";
+import "./controls";
 
-import playerControls from "./playerControls";
+const scene: Scene = new Scene({ width: 800, height: 720, background: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn.wallpapersafari.com%2F82%2F13%2F81ZF6o.jpg&f=1&nofb=1" });
 
-const scene: Scene = new Scene({ width: 1080, height: 720, background: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2Foriginals%2Faa%2F46%2Fbe%2Faa46beaee67d41a7e5fb027b1ffca0f1.png&f=1&nofb=1" });
-
-playerControls(scene);
+// center player on scene
+player.setPosX(400 - player.getWidth());
+player.setPosY((720 / 2) - player.getHeight());
 
 scene.addEntity(player);
 
-// fps init
-let lastTime:  number = performance.now();
-let delta:     number = 0;
-let frames:    number = 0;
-let totalTime: number = 0;
+// meteors generator
+let meteors: Array<Entity> = [];
 
-// fps loop
-Utils.loop((): void => {
-	let now: number = performance.now();
+for (let i: number = 0; i < 20; i++) {
+	meteors.push(new Entity(
+		"meteor",
+		"https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fclipart-library.com%2Fimages_k%2Fasteroid-transparent%2Fasteroid-transparent-5.png&f=1&nofb=1",
+		{ width: 20, height: 35 },
+		{ x: Math.round(Math.random() * 800), y: Math.round(Math.random() * 720) },
+		"image",
+		false
+	));
+}
 
-  delta      = now-lastTime;
-  lastTime   = now;
-  totalTime += delta;
-  frames++;
+for (const meteor of meteors) {
+	scene.addEntity(meteor);
 
-	fps.innerHTML = "fps: " + Math.floor(1000 * (frames / totalTime));
-});
-
-// block loop
-for (const block of blocks) {
-	scene.addEntity(block);
-
-	const loop: unknown = Utils.loop((): void => {
-		if (Physics.isColliding(player, block)) {
-			item.innerHTML     = "picked up: " + block.id;
-			item.style.left    = player.getPosX() + "px";
-			item.style.top     = (player.getPosY() - player.getHeight()) + "px";
-			item.style.display = "";
-
-			scene.destroyEntity(block);
-			blocks.pop();
-
-			setTimeout((): void => {
-				item.style.display = "none";
-
-				Utils.clearLoop(loop);
-			}, 700);
-		}
+	Physics.addGravity(meteor, 0.05, 720, (): void => {
+		meteor.setPosY(0 - meteor.getHeight());
 	});
 }
+
+// game loop
+let pointsCount: number = 0;
+
+Utils.loop((): void => {
+	points.innerHTML = "Points: " + Math.floor(pointsCount);
+
+	pointsCount += 0.1;
+
+	for (const meteor of meteors) {
+		// movement meteor
+		meteor.setPosX(meteor.getPosX() + 0.5);
+
+		// teleport meteor when touch scene borders
+		if (meteor.getPosX() > (800 + player.getWidth())) meteor.setPosX(0 - player.getWidth());
+
+		// check player/meteor collision
+		if (Physics.isColliding(player, meteor)) window.location.reload();
+	}
+
+	// teleport player when touch scene borders
+	if (player.getPosX() > (800 + player.getWidth())) player.setPosX(0 - player.getWidth());
+	if (player.getPosX() < (0 - player.getWidth()))   player.setPosX(800 - player.getWidth());
+});
 
