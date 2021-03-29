@@ -48,10 +48,10 @@ for (const meteorCouple of meteors) {
 // game loop
 let pointsCount: number = 0;
 
-Utils.loop((): void => {
-	points.innerHTML = "Points: " + Math.floor(pointsCount);
+const gameLoop: unknown = Utils.loop((): void => {
+	points.innerHTML = "Points: " + pointsCount;
 
-	pointsCount += 0.1;
+	pointsCount = Math.floor(pointsCount + 0.1);
 
 	for (const meteorCouple of meteors) {
 		const meteor:    Entity    = meteorCouple[0];
@@ -70,7 +70,12 @@ Utils.loop((): void => {
 
 
 		// check player/meteor collision
-		if (Physics.isColliding(player, meteor)) window.location.reload();
+		if (Physics.isColliding(player, meteor)) {
+			Utils.clearLoop(gameLoop);
+
+			alert("F, score was " + pointsCount);
+			window.location.reload();
+		}
 	}
 
 	// teleport player when touch scene borders
